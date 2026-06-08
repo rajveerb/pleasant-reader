@@ -25,7 +25,9 @@ const SITES = [
   // ~60% of observed extraction length, for robustness against minor edits.
   { name: 'vllm', url: 'https://vllm.ai/blog/2025-09-05-anatomy-of-vllm', minLen: 30000 },
   { name: 'nvidia-cuda', url: 'https://developer.nvidia.com/blog/even-easier-introduction-cuda/', minLen: 10000 },
-  { name: 'nvidia-tile', url: 'https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-tile-kernels.html', minLen: 35000 }
+  { name: 'nvidia-tile', url: 'https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-tile-kernels.html', minLen: 35000 },
+  { name: 'wikipedia', url: 'https://en.wikipedia.org/wiki/Starlink', minLen: 100000 },
+  { name: 'grokipedia', url: 'https://grokipedia.com/page/Starlink', minLen: 90000 }
 ];
 
 const RUN = process.env.PR_LIVE === '1';
