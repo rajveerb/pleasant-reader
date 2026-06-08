@@ -97,6 +97,16 @@ html[data-pleasant-restyle] kbd,
 html[data-pleasant-restyle] samp {
   font-family: 'Fragment Mono', ui-monospace, monospace !important;
   color: var(--pr-dark-brown) !important;
+}
+
+/* The chip background/padding is only for INLINE code in prose. Some syntax
+   highlighters (SyntaxHighlighter, Crayon, ...) wrap every code-block token in
+   its own <code> inside <div>s — giving each a chip turned the whole block into
+   an unreadable mosaic of boxes (dark chips on a light code surface in dark
+   mode). Restricting the chip to code that's a direct child of a text element
+   leaves those block tokens to render plainly on the block's own surface. */
+html[data-pleasant-restyle] :is(p, li, dd, dt, td, th, h1, h2, h3, h4, h5, h6,
+  blockquote, figcaption, a, em, strong, b, i, label, summary) > code {
   background-color: var(--pr-card-bg) !important;
   border-radius: 3px !important;
   padding: 0.1em 0.35em !important;
