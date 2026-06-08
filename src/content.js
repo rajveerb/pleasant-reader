@@ -410,6 +410,36 @@
 
   /* ---------------------------- restyle mode -------------------------- */
 
+  // Restyle's universal background neutralizer turns every element's background
+  // transparent so the cream shows through. That's fine for in-flow elements,
+  // but a position:fixed/sticky bar (nav, header, cookie banner) then becomes
+  // see-through and the page content scrolls visibly underneath it. Give those
+  // bars an opaque themed background. Limited to likely candidates so we don't
+  // read computed style for every element on the page.
+  const BAR_SELECTOR = 'header, nav, aside, [role="banner"], [role="navigation"],' +
+    ' [role="dialog"], [class*="nav" i], [class*="header" i], [class*="bar" i],' +
+    ' [class*="banner" i], [class*="sticky" i], [class*="fixed" i], [class*="cookie" i],' +
+    ' [class*="consent" i], [id*="nav" i], [id*="header" i]';
+
+  function pinRestyleBars() {
+    state.restyleBars = [];
+    let els;
+    try { els = document.querySelectorAll(BAR_SELECTOR); } catch (e) { return; }
+    els.forEach((el) => {
+      const pos = getComputedStyle(el).position;
+      if (pos === 'fixed' || pos === 'sticky') {
+        el.style.setProperty('background-color', 'var(--pr-cream)', 'important');
+        state.restyleBars.push(el);
+      }
+    });
+  }
+
+  function unpinRestyleBars() {
+    if (!state.restyleBars) return;
+    state.restyleBars.forEach((el) => { try { el.style.removeProperty('background-color'); } catch (e) {} });
+    state.restyleBars = null;
+  }
+
   async function enableRestyle(silentFallback) {
     if (state.mode === 'reader') removeReader();
     if (state.mode === 'restyle') return true;
@@ -425,6 +455,7 @@
     document.documentElement.setAttribute('data-pleasant-restyle', resolvedTheme());
     document.documentElement.setAttribute('data-pleasant-figures', state.settings.keepFiguresLight ? 'light' : 'invert');
     document.documentElement.style.setProperty('--pr-font-scale', String(state.settings.fontScale));
+    pinRestyleBars();
     watchSystemTheme();
     state.mode = 'restyle';
     notifyBackground();
@@ -434,6 +465,7 @@
   function removeRestyle() {
     const link = document.getElementById(RESTYLE_LINK_ID);
     if (link) link.remove();
+    unpinRestyleBars();
     document.documentElement.removeAttribute('data-pleasant-restyle');
     document.documentElement.removeAttribute('data-pleasant-figures');
     document.documentElement.style.removeProperty('--pr-font-scale');
