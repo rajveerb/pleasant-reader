@@ -121,6 +121,16 @@ html[data-pleasant-restyle] video {
   border-radius: var(--pr-radius) !important;
 }
 
+/* Wide data tables (e.g. Wikipedia wikitables) would otherwise overflow the
+   viewport and force a page-level horizontal scrollbar. Cap them to their
+   container and let an over-wide one scroll within itself rather than the page.
+   Narrow tables (infoboxes) are already < 100%, so they're unaffected. */
+html[data-pleasant-restyle] table {
+  max-width: 100% !important;
+  display: block !important;
+  overflow-x: auto !important;
+}
+
 /* Mirror reader mode: in dark theme, invert images so light diagrams read on
    dark — unless "keep figures light" is on (data-pleasant-figures="light"). */
 html[data-pleasant-restyle="dark"]:not([data-pleasant-figures="light"]) img,
