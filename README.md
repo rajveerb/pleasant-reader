@@ -5,6 +5,34 @@ into a calm, soothing read — warm earthy colors, fluid typography, and a
 comfortable reading column instead of cramped fonts, glaring whites, and
 cluttered layouts.
 
+## Screenshots
+
+**Before → after.** A cluttered page (nav bar, sidebar ads, cramped lines) is
+rebuilt into a clean, centered reading column:
+
+| Before | After — Reader mode (light) |
+| :---: | :---: |
+| ![A cluttered original article page](docs/images/before.png) | ![The same article in Reader mode, light theme](docs/images/reader-light.png) |
+
+**Restyle mode & the popup.** Restyle repaints the page in place (a lighter
+touch than Reader); the popup drives mode, theme, text size, and the per-site
+rule:
+
+| Restyle mode | Popup |
+| :---: | :---: |
+| ![The page repainted in place by Restyle mode](docs/images/restyle.png) | ![The extension popup with its controls](docs/images/popup.png) |
+
+**Dark theme & rich content.** Light/Dark/Auto themes; code blocks get warm
+Monokai highlighting and LaTeX math renders via bundled KaTeX:
+
+| Reader mode (dark) | Code + math |
+| :---: | :---: |
+| ![Reader mode in dark theme](docs/images/reader-dark.png) | ![Syntax-highlighted code and rendered math in the reader](docs/images/reader-code-math.png) |
+
+> Screenshots are generated from the bundled sample articles by
+> `node scripts/screenshots.mjs` (drives the real extension in headless
+> Chromium via the test harness).
+
 ## Features
 
 - **Reader mode** — extracts the article and rebuilds it in a clean, centered
