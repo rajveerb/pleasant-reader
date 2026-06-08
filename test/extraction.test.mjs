@@ -167,4 +167,24 @@ describe('extraction', () => {
     assert.ok(r.paras >= 2, `real paragraphs should survive, got ${r.paras}`);
     assert.equal(r.empties, 0, 'nested empty wrapper divs should be removed');
   });
+
+  test('whitespace between code tokens inside <pre> is preserved', async () => {
+    // Syntax highlighters hold spaces in empty spans (e.g. `<span class="w"> </span>`);
+    // the empty-element cleanup must not strip those or it mangles the code.
+    const p = await ctx.newPage();
+    const para = 'A substantial paragraph with enough prose to anchor the extractor reliably here. '.repeat(5);
+    await p.setContent(`<!doctype html><html><body><article><h1>Code</h1>
+      <p>${para}</p>
+      <pre><span class="k">namespace</span><span class="w"> </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>;</pre>
+      <p>${para}</p>
+    </article></body></html>`);
+    await p.addScriptTag({ path: READABILITY });
+    const text = await p.evaluate(() => {
+      const pre = window.PleasantReadability.parse().content.querySelector('pre');
+      return pre ? pre.textContent : null;
+    });
+    await p.close();
+    assert.ok(text && text.includes('namespace ct = x'),
+      `code token spacing should survive extraction, got: ${JSON.stringify(text)}`);
+  });
 });

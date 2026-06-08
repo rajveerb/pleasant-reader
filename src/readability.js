@@ -313,7 +313,11 @@
     const blocks = node.querySelectorAll('div, span, section, p');
     for (let i = blocks.length - 1; i >= 0; i--) {
       const el = blocks[i];
-      if (textLen(el) === 0 && !el.querySelector('img, pre, iframe, video, table')) {
+      // Don't prune whitespace-only elements inside <pre>: syntax highlighters
+      // hold the spaces between code tokens in empty spans (e.g.
+      // `<span class="w"> </span>`); removing them mangles the code
+      // (`namespace ct = x` -> `namespacect=x`).
+      if (textLen(el) === 0 && !el.querySelector('img, pre, iframe, video, table') && !el.closest('pre')) {
         el.remove();
       }
     }
