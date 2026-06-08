@@ -138,26 +138,12 @@ html[data-pleasant-restyle="dark"]:not([data-pleasant-figures="light"]) picture 
   filter: invert(1) hue-rotate(180deg) !important;
 }
 
-/* Widen + center the most common article containers to ~65ch. */
-html[data-pleasant-restyle] article,
-html[data-pleasant-restyle] main,
-html[data-pleasant-restyle] [role="main"],
-html[data-pleasant-restyle] .post,
-html[data-pleasant-restyle] .post-content,
-html[data-pleasant-restyle] .entry-content,
-html[data-pleasant-restyle] .article-content,
-html[data-pleasant-restyle] .article-body,
-html[data-pleasant-restyle] .markdown-body,
-html[data-pleasant-restyle] .prose {
-  max-width: 72ch !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  float: none !important;
-  width: auto !important;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-  background-color: transparent !important;
-}
+/* Restyle deliberately does NOT impose a reading-column width or re-center
+   content: it preserves the page's original layout/widths and only repaints
+   colors and typography (the "lighter touch" mode). Reader mode is the one that
+   rebuilds the article into a clean ~65ch column. Constraining the column here
+   re-flowed the page and narrowed it below the width of wide code/tables (e.g.
+   the NVIDIA CUDA docs), so it was removed. */
 
 html[data-pleasant-restyle] hr {
   border: none !important;
