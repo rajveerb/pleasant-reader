@@ -21,7 +21,11 @@ const CREAM = 'rgb(241, 233, 223)';
 const SITES = [
   { name: 'jalammar', url: 'https://jalammar.github.io/illustrated-retrieval-transformer/', minLen: 4000 },
   { name: 'substack', url: 'https://cameronrwolfe.substack.com/p/decoder-only-transformers-the-workhorse', minLen: 10000 },
-  { name: 'perplexity', url: 'https://research.perplexity.ai/articles/rethinking-search-as-code-generation', minLen: 8000 }
+  { name: 'perplexity', url: 'https://research.perplexity.ai/articles/rethinking-search-as-code-generation', minLen: 8000 },
+  // ~60% of observed extraction length, for robustness against minor edits.
+  { name: 'vllm', url: 'https://vllm.ai/blog/2025-09-05-anatomy-of-vllm', minLen: 30000 },
+  { name: 'nvidia-cuda', url: 'https://developer.nvidia.com/blog/even-easier-introduction-cuda/', minLen: 10000 },
+  { name: 'nvidia-tile', url: 'https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-tile-kernels.html', minLen: 35000 }
 ];
 
 const RUN = process.env.PR_LIVE === '1';
