@@ -65,11 +65,14 @@ chrome.commands.onCommand.addListener((command) => {
   });
 });
 
-// Reflect on/off state in the toolbar badge.
+// Reflect on/off state in the toolbar badge. The tab may have closed between the
+// triggering event and these calls (e.g. onUpdated 'loading' for a tab that's
+// already going away), in which case they reject with "No tab with id: N" —
+// swallow that benign race rather than leak an uncaught rejection.
 function setBadge(tabId, mode) {
   const on = mode && mode !== 'off';
-  chrome.action.setBadgeText({ tabId, text: on ? 'ON' : '' });
-  chrome.action.setBadgeBackgroundColor({ tabId, color: '#89553E' });
+  chrome.action.setBadgeText({ tabId, text: on ? 'ON' : '' }).catch(() => {});
+  chrome.action.setBadgeBackgroundColor({ tabId, color: '#89553E' }).catch(() => {});
 }
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
