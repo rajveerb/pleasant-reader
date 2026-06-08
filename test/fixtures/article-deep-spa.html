@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Deeply Nested SPA Article</title>
+  <meta property="og:title" content="Deeply Nested SPA Article">
+</head>
+<body>
+  <div id="root">
+    <div class="layout">
+      <div class="col">
+        <div class="wrap">
+          <div class="content-shell">
+            <div class="prose-wrap">
+              <div class="inner">
+                <!-- No <article>/<main>/[role=main] landmark anywhere; the
+                     paragraphs sit ~7 divs deep. Only the densest-container
+                     fallback can locate this content. -->
+                <h1>Deeply Nested SPA Article</h1>
+                <p>Single-page applications built with component frameworks often render their content many levels deep inside anonymous div wrappers, with no semantic article or main landmark to grab onto. A reader that only looks for those landmarks will find nothing here.</p>
+                <p>The score-based extraction propagates paragraph scores only a few ancestors upward, so in a tree this deep it never reaches the true content container. The densest-container fallback instead sums paragraph text into every ancestor and picks the tightest wrapper holding the bulk of it.</p>
+                <p>This paragraph adds more prose so that the common wrapper clearly holds the majority of the page's paragraph text, which is exactly the signal the fallback relies on to choose the right container rather than the document body.</p>
+                <p>A final paragraph guarantees the cleaned content exceeds the minimum length, so the parser reports success and the reader renders this deeply nested article in a clean, centred column instead of giving up.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

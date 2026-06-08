@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Rem scaling | Test</title>
+  <meta property="og:title" content="Rem scaling">
+  <!-- The classic rem-scaling trick: a small root font-size. The reader must
+       stay at its own 18px base regardless, instead of shrinking with this. -->
+  <style>html { font-size: 40%; }</style>
+</head>
+<body>
+  <article>
+    <h1>Rem scaling</h1>
+    <p>This page sets the document root font-size to forty percent, a common rem-scaling technique. If the reader's typography were sized in rem it would shrink along with the page and become unreadable, so the reader uses an absolute base and em units internally to stay isolated.</p>
+    <p>This second paragraph adds enough prose for the extractor to confidently treat the page as an article and rebuild it, so the test can measure the computed font size of a reader paragraph and confirm it is the intended eighteen-pixel base rather than a tiny fraction of it.</p>
+    <p>A third paragraph keeps the cleaned body length comfortably above the extraction threshold so the reader activates reliably on this page during the test run.</p>
+  </article>
+</body>
+</html>

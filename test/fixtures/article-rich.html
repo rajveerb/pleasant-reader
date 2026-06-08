@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Code and Math | Test</title>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Code and Math">
+</head>
+<body>
+  <article>
+    <h1>Code and Math</h1>
+    <p>This article contains both a code block and some mathematics, so the reader's syntax highlighting and KaTeX math rendering can be exercised. The paragraphs around them give the extractor enough prose to lock onto the article body.</p>
+
+    <p>First, a small function whose keywords, strings, numbers and comments should each be coloured by the reader's generic highlighter:</p>
+    <pre><code>// compute a greeting
+function greet(name) {
+  const count = 42;
+  return "Hello, " + name + "!";
+}</code></pre>
+
+    <p>Inline math such as $E = mc^2$ should render, and so should a display equation:</p>
+    <p>$$\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}$$</p>
+    <p>A parenthesis-delimited form like \(a^2 + b^2 = c^2\) should render too, while a bare price like $5 in prose must NOT be treated as math.</p>
+
+    <p>A closing paragraph keeps the article body the dominant column of text so extraction succeeds and the reader rebuilds the page cleanly with highlighted code and rendered math.</p>
+  </article>
+</body>
+</html>

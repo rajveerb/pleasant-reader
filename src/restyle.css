@@ -1,0 +1,171 @@
+/*
+ * Pleasant Reader — in-place restyle mode.
+ * Injected into the host document. Keeps the site's DOM but repaints it with
+ * the warm palette and typography. Everything is scoped under
+ * html[data-pleasant-restyle] and uses !important to win against site CSS.
+ * This is the lighter-touch alternative to full reader mode.
+ */
+
+html[data-pleasant-restyle] {
+  --pr-cream: #F1E9DF;
+  --pr-dark-brown: #483A31;
+  --pr-rust: #89553E;
+  --pr-body-text: #7B6F65;
+  --pr-card-bg: #F4EFE9;
+  --pr-code-text: #FCFCFA;
+  --pr-code-bg: #2D2A2E;
+  --pr-radius: 6px;
+  --pr-border-medium: rgba(137, 85, 62, 0.15);
+}
+
+html[data-pleasant-restyle="dark"] {
+  --pr-cream: #1a1714;
+  --pr-dark-brown: #e8ddd0;
+  --pr-rust: #c4836a;
+  --pr-body-text: #a89e94;
+  --pr-card-bg: #242019;
+  --pr-code-bg: #2a2628;
+  --pr-border-medium: rgba(200, 180, 160, 0.15);
+}
+
+html[data-pleasant-restyle],
+html[data-pleasant-restyle] body {
+  background-color: var(--pr-cream) !important;
+  color: var(--pr-body-text) !important;
+  font-family: 'National Park', system-ui, sans-serif !important;
+  font-size: 1.125rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Text-size control in restyle mode. The site keeps its own (often fixed-px)
+   font sizes, so a CSS font-size override can't reliably scale everything;
+   zoom scales the whole page proportionally (like browser zoom), giving the
+   popup's A-/A+ and slider a real effect on any site. */
+html[data-pleasant-restyle] {
+  /* clamp bounds a stray/extreme --pr-font-scale (page- or storage-supplied) so
+     it can't zoom the page to invisible or massive overflow. */
+  zoom: clamp(0.8, var(--pr-font-scale, 1), 1.6);
+}
+
+html[data-pleasant-restyle] p,
+html[data-pleasant-restyle] li,
+html[data-pleasant-restyle] span,
+html[data-pleasant-restyle] dd,
+html[data-pleasant-restyle] dt,
+html[data-pleasant-restyle] td,
+html[data-pleasant-restyle] th,
+html[data-pleasant-restyle] blockquote {
+  font-family: 'National Park', system-ui, sans-serif !important;
+  color: var(--pr-body-text) !important;
+  background-color: transparent !important;
+}
+
+html[data-pleasant-restyle] h1,
+html[data-pleasant-restyle] h2,
+html[data-pleasant-restyle] h3,
+html[data-pleasant-restyle] h4,
+html[data-pleasant-restyle] h5,
+html[data-pleasant-restyle] h6 {
+  font-family: 'National Park', system-ui, sans-serif !important;
+  color: var(--pr-dark-brown) !important;
+  line-height: 1.2 !important;
+  background-color: transparent !important;
+}
+
+html[data-pleasant-restyle] p { margin-bottom: 1em !important; }
+
+html[data-pleasant-restyle] a {
+  color: var(--pr-rust) !important;
+  text-decoration-color: var(--pr-rust) !important;
+}
+
+html[data-pleasant-restyle] strong,
+html[data-pleasant-restyle] b {
+  color: var(--pr-dark-brown) !important;
+  font-weight: 700 !important;
+}
+
+html[data-pleasant-restyle] blockquote {
+  border-left: 0.5rem solid var(--pr-rust) !important;
+  padding-left: 1.5rem !important;
+  color: var(--pr-rust) !important;
+  font-style: normal !important;
+}
+
+html[data-pleasant-restyle] code,
+html[data-pleasant-restyle] kbd,
+html[data-pleasant-restyle] samp {
+  font-family: 'Fragment Mono', ui-monospace, monospace !important;
+  color: var(--pr-dark-brown) !important;
+  background-color: var(--pr-card-bg) !important;
+  border-radius: 3px !important;
+  padding: 0.1em 0.35em !important;
+}
+
+html[data-pleasant-restyle] pre {
+  background-color: var(--pr-code-bg) !important;
+  border-radius: var(--pr-radius) !important;
+  padding: 1.25rem !important;
+  overflow-x: auto !important;
+}
+
+html[data-pleasant-restyle] pre code {
+  color: var(--pr-code-text) !important;
+  background: none !important;
+  padding: 0 !important;
+  font-size: 0.85em !important;
+}
+
+html[data-pleasant-restyle] img,
+html[data-pleasant-restyle] video {
+  border-radius: var(--pr-radius) !important;
+}
+
+/* Mirror reader mode: in dark theme, invert images so light diagrams read on
+   dark — unless "keep figures light" is on (data-pleasant-figures="light"). */
+html[data-pleasant-restyle="dark"]:not([data-pleasant-figures="light"]) img,
+html[data-pleasant-restyle="dark"]:not([data-pleasant-figures="light"]) picture {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+/* Widen + center the most common article containers to ~65ch. */
+html[data-pleasant-restyle] article,
+html[data-pleasant-restyle] main,
+html[data-pleasant-restyle] [role="main"],
+html[data-pleasant-restyle] .post,
+html[data-pleasant-restyle] .post-content,
+html[data-pleasant-restyle] .entry-content,
+html[data-pleasant-restyle] .article-content,
+html[data-pleasant-restyle] .article-body,
+html[data-pleasant-restyle] .markdown-body,
+html[data-pleasant-restyle] .prose {
+  max-width: 72ch !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+  width: auto !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  background-color: transparent !important;
+}
+
+html[data-pleasant-restyle] hr {
+  border: none !important;
+  border-top: 1px solid var(--pr-border-medium) !important;
+}
+
+/* ===== AGGRESSIVE-SITE HARDENING ===== */
+/* Page builders (Framer, Tailwind utility classes, CSS-in-JS) paint
+   backgrounds and text colors onto many nested elements, which keeps the page
+   light in restyle mode — especially in dark theme. Neutralize element
+   backgrounds so the themed page background shows through, and force a readable
+   text color. Media and code keep their own surfaces; headings, links, strong
+   and code keep their accent colors (excluded below). */
+html[data-pleasant-restyle] body *:not(img):not(picture):not(video):not(svg):not(canvas):not(pre):not(code):not(kbd):not(samp):not([class*="highlight"]):not([class*="hljs"]) {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html[data-pleasant-restyle] body *:not(a):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(strong):not(b):not(blockquote):not(code):not(kbd):not(samp):not(pre):not(svg):not(img):not(button):not(input):not(select):not(textarea):not([class*="highlight"]):not([class*="hljs"]) {
+  color: var(--pr-body-text) !important;
+}

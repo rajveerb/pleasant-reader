@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Links Under Test | Test Blog</title>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Links Under Test">
+  <meta name="author" content="Jane Doe">
+</head>
+<body>
+  <article>
+    <h1>Links Under Test</h1>
+    <p>Reading well is a skill that rewards patience. When the words are set in a comfortable measure, the eye glides without strain, and the mind follows along the line of thought instead of fighting the layout. This first paragraph is long enough to anchor the main content cluster for the extractor to detect reliably every time.</p>
+    <p>This paragraph carries the active-scheme payloads that the extractor must neutralize. Here is a
+      <a id="js-link" href="javascript:window.__pwned=1">javascript link</a>,
+      a <a id="vb-link" href="VBScript:msgbox(1)">vbscript link</a>,
+      a <a id="data-link" href="data:text/html,<script>1</script>">data link</a>,
+      a normal <a id="ok-link" href="/follow-up">relative link</a>,
+      and an absolute <a id="abs-link" href="https://example.com/page">https link</a>.</p>
+    <p>Typography is not decoration; it is the interface between the reader and the writer. A line that is too long forces the eye to hunt for the start of the next row, and a line that is too short fractures the rhythm of reading, so a moderate measure keeps the body substantial enough to extract.</p>
+    <p>A closing paragraph rounds out the body so that the article remains the dominant column of prose on the page and the extractor locks onto it without ambiguity or any drift at all.</p>
+    <p>An image with a hostile source should also be neutralized:
+      <img id="js-img" src="javascript:alert(1)" alt="bad">
+      while a normal one is kept:
+      <img id="ok-img" src="diagram.png" alt="ok">.</p>
+    <p>srcset must not smuggle an unsanitized URL past the src filter:
+      <img id="srcset-evil" src="https://ok.example/safe.png" srcset="https://evil.example/track.png 2x" alt="srcset evil">
+      a srcset-only image with a hostile first candidate is dropped:
+      <img id="srcset-js" srcset="javascript:alert(1) 1x, https://ok.example/b.png 2x" alt="srcset js">
+      a legitimate srcset-only image still renders from its first candidate:
+      <img id="srcset-ok" srcset="https://ok.example/c.png 1x, https://ok.example/c2.png 2x" alt="srcset ok">.</p>
+    <picture id="pic">
+      <source id="src-evil" srcset="https://evil.example/p.png">
+      <img id="pic-img" src="https://ok.example/pic.png" alt="picture">
+    </picture>
+    <p>data: images are allowed (cannot run script), and src on media elements is
+      filtered too — a comma-bearing data: srcset candidate must survive intact:
+      <img id="data-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==" alt="data img">
+      <img id="srcset-data" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg== 1x, https://ok.example/d.png 2x" alt="srcset data">
+      <img id="srcset-comma" srcset="data:text/plain,aa,bb,cc 1x, https://ok.example/f.png 2x" alt="srcset comma"></p>
+    <video id="vid" src="javascript:evil()"></video>
+    <audio id="aud" src="vbscript:msgbox(1)"></audio>
+    <video id="vid2"><source id="vsrc" src="javascript:evil()"></video>
+    <p>An inline SVG (a foreign-namespace element whose lowercase tagName must
+      still be hard-stripped) carrying script/style must not survive:
+      <svg id="evil-svg" xmlns="http://www.w3.org/2000/svg" width="10" height="10">
+        <script>window.__svg = 1;</script>
+        <style>.x { color: red }</style>
+        <a xlink:href="javascript:evil()"><text>x</text></a>
+      </svg>.</p>
+  </article>
+</body>
+</html>

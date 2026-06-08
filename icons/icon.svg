@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Pleasant Reader icon: a clean article column in the blog palette -->
+  <rect width="128" height="128" rx="28" fill="#89553E"/>
+  <!-- paper / reading column -->
+  <rect x="30" y="22" width="68" height="84" rx="8" fill="#F1E9DF"/>
+  <!-- title bar (dark brown) -->
+  <rect x="42" y="36" width="44" height="9" rx="4.5" fill="#483A31"/>
+  <!-- body text lines (body-text color) -->
+  <rect x="42" y="56" width="44" height="5" rx="2.5" fill="#7B6F65"/>
+  <rect x="42" y="67" width="44" height="5" rx="2.5" fill="#7B6F65"/>
+  <rect x="42" y="78" width="34" height="5" rx="2.5" fill="#7B6F65"/>
+  <!-- rust accent dot (the brand mark) -->
+  <circle cx="86" cy="93" r="6" fill="#89553E"/>
+</svg>

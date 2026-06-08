@@ -1,0 +1,21 @@
+{
+  "name": "pleasant-reader",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pleasant Reader browser extension — tests",
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-force-exit --test-concurrency=1 test/manifest.test.mjs test/provenance.test.mjs test/extraction.test.mjs test/gating.test.mjs test/e2e.test.mjs test/ui.test.mjs",
+    "test:extraction": "node --test --test-force-exit test/extraction.test.mjs",
+    "test:manifest": "node --test --test-force-exit test/manifest.test.mjs",
+    "test:provenance": "node --test --test-force-exit test/provenance.test.mjs",
+    "test:gating": "node --test --test-force-exit --test-concurrency=1 test/gating.test.mjs",
+    "test:e2e": "node --test --test-force-exit --test-concurrency=1 test/e2e.test.mjs",
+    "test:ui": "node --test --test-force-exit --test-concurrency=1 test/ui.test.mjs",
+    "test:live": "PR_LIVE=1 node --test --test-force-exit --test-concurrency=1 test/live.test.mjs",
+    "test:all": "PR_LIVE=1 node --test --test-force-exit --test-concurrency=1 test/manifest.test.mjs test/provenance.test.mjs test/extraction.test.mjs test/gating.test.mjs test/e2e.test.mjs test/ui.test.mjs test/live.test.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.40.0"
+  }
+}

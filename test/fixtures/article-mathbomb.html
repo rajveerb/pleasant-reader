@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Math Bomb | Test</title>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Math Bomb">
+</head>
+<body>
+  <article>
+    <h1>Math Bomb</h1>
+    <p>This article contains hostile math intended to exhaust the renderer. The
+      reader must bound it (maxSize / maxExpand / input cap) and stay responsive.
+      A macro-expansion bomb: $\def\x{\x\x}\x$ and a giant rule:
+      $\rule{100000em}{100000em}$ should both be contained.</p>
+    <p>A second paragraph of ordinary prose keeps the article body substantial
+      enough for the extractor to lock on and render the reader column, so the
+      math above is processed inside the reader's shadow DOM as usual.</p>
+    <p>A closing paragraph rounds out the body so extraction is unambiguous and
+      the math-rendering path is actually exercised on this page.</p>
+  </article>
+</body>
+</html>

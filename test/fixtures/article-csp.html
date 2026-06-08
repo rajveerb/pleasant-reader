@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reading Under a Strict Policy | CSP Test</title>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Reading Under a Strict Policy">
+  <meta name="author" content="Jane Doe">
+</head>
+<body>
+  <nav><a href="/">Home</a> <a href="/about">About</a></nav>
+  <article>
+    <h1>Reading Under a Strict Policy</h1>
+    <p>This page is served with a strict Content-Security-Policy whose connect-src is limited to 'self'. That policy is exactly the condition under which a fetch-based stylesheet loader could leave the reader unstyled, so the reader loads its CSS through a link element instead.</p>
+    <p>If styling applied correctly, the reader host paints the warm cream background in light mode and a dark background in dark mode, proving the stylesheet loaded despite the restrictive policy on this page.</p>
+    <p>A third paragraph provides enough prose for the extractor to confidently treat this as an article and rebuild it in the reader column, where the assertions then check the computed background colour.</p>
+    <p>And a final paragraph keeps the cleaned body length above the minimum extraction threshold so the parser reports success on this strict-policy page.</p>
+  </article>
+  <footer><a href="/privacy">Privacy</a></footer>
+</body>
+</html>

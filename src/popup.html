@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="pr-popup">
+    <header class="pr-head">
+      <span class="pr-brand"><span class="pr-dot"></span> Pleasant Reader</span>
+    </header>
+
+    <button id="toggle" class="pr-toggle" disabled>Make this page pleasant</button>
+
+    <div id="unavailable" class="pr-note" hidden>
+      This page can't be transformed.
+    </div>
+
+    <section class="pr-section">
+      <h2 class="pr-label">Mode</h2>
+      <div class="pr-seg" id="mode-seg" role="group">
+        <button data-mode="reader" class="pr-seg-btn">Reader</button>
+        <button data-mode="restyle" class="pr-seg-btn">Restyle</button>
+      </div>
+      <p class="pr-hint" id="mode-hint">Reader rebuilds the article in a clean column.</p>
+    </section>
+
+    <section class="pr-section">
+      <h2 class="pr-label">Theme</h2>
+      <div class="pr-seg" id="theme-seg" role="group">
+        <button data-theme="auto" class="pr-seg-btn">Auto</button>
+        <button data-theme="light" class="pr-seg-btn">Light</button>
+        <button data-theme="dark" class="pr-seg-btn">Dark</button>
+      </div>
+    </section>
+
+    <section class="pr-section">
+      <h2 class="pr-label">Text size</h2>
+      <div class="pr-font">
+        <button id="font-dec" class="pr-step">A−</button>
+        <input type="range" id="font-range" min="0.8" max="1.6" step="0.1" value="1">
+        <button id="font-inc" class="pr-step">A+</button>
+        <span id="font-val" class="pr-fontval">100%</span>
+      </div>
+    </section>
+
+    <section class="pr-section">
+      <label class="pr-switch">
+        <input type="checkbox" id="keep-figures-light">
+        <span class="pr-switch-track"><span class="pr-switch-thumb"></span></span>
+        <span class="pr-switch-label">Keep figures light in dark mode</span>
+      </label>
+    </section>
+
+    <section class="pr-section pr-site">
+      <h2 class="pr-label">On <span id="site-host">this site</span></h2>
+      <div class="pr-seg" id="site-seg" role="group">
+        <button data-override="always" class="pr-seg-btn">Always</button>
+        <button data-override="never" class="pr-seg-btn">Never</button>
+      </div>
+      <p class="pr-hint" id="site-hint">Always asks permission to open automatically here. Never (the default) only opens when you ask.</p>
+    </section>
+
+    <footer class="pr-foot">
+      <span id="shortcut-hint">Shortcut: Alt+R</span>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

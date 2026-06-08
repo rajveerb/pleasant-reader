@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hostile CSS | Test</title>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hostile CSS">
+  <!-- A malicious page trying to hide/defeat the reader overlay via every CSS
+       escape hatch that targets the fixed, known host id. -->
+  <style>
+    #pleasant-reader-host {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      z-index: 0 !important;
+      pointer-events: none !important;
+      transform: scale(0) !important;
+      scale: 0 !important;
+      translate: 100vw 0 !important;
+      rotate: 90deg !important;
+      clip-path: inset(100%) !important;
+      max-width: 0 !important;
+      max-height: 0 !important;
+      background: transparent !important;
+      background-color: transparent !important;
+      mix-blend-mode: difference !important;
+      content-visibility: hidden !important;
+      contain: strict !important;
+      filter: opacity(0) !important;
+      mask: url(#x) !important;
+    }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>Hostile CSS</h1>
+    <p>Reading well is a skill that rewards patience. This first paragraph is long enough to anchor the main content cluster so the extractor detects the article reliably and the reader overlay is created for the test to inspect.</p>
+    <p>Typography is the interface between reader and writer; a comfortable measure keeps the body substantial enough that extraction is unambiguous and the reader mounts its shadow-DOM overlay onto the page.</p>
+    <p>A closing paragraph rounds out the body so the article remains the dominant column of prose and the extractor locks onto it without drift.</p>
+  </article>
+</body>
+</html>

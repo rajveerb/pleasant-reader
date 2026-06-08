@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "Pleasant Reader",
+  "version": "1.0.0",
+  "description": "View blogs and articles pleasantly — a warm, soothing reader with calm typography. Works in Chrome and Brave.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Pleasant Reader",
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "optional_host_permissions": [
+    "*://*/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; base-uri 'none'"
+  },
+  "commands": {
+    "toggle-reader": {
+      "suggested_key": {
+        "default": "Alt+R"
+      },
+      "description": "Toggle Pleasant Reader on the current page"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "fonts/*.woff2",
+        "src/reader.css",
+        "src/restyle.css",
+        "vendor/katex/katex.mjs",
+        "vendor/katex/auto-render.mjs",
+        "vendor/katex/katex.min.css",
+        "vendor/katex/fonts/*.woff2"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

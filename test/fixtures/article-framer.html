@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Rethinking Layouts | Framer-style Test</title>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Rethinking Layouts">
+</head>
+<body>
+  <!-- Real chrome: a nav that is only links — should be stripped. -->
+  <nav class="framer-nav"><a href="/">Home</a> <a href="/work">Work</a> <a href="/blog">Blog</a> <a href="/hire">We're Hiring</a></nav>
+
+  <!-- Page builders like Framer wrap real article content inside <header>
+       (and <footer>) elements with random class names. The extractor must NOT
+       treat these as chrome, because they hold the actual prose. -->
+  <div id="main">
+    <div class="framer-0DBjA">
+      <header class="framer-159wj77">
+        <div class="framer-14u7ytv">
+          <div class="framer-rdjk9z">
+            <h1 class="framer-text">Rethinking Layouts</h1>
+            <p class="framer-text">Search is a core primitive for modern systems, and yet the way most pages present long-form writing has barely changed. This article is wrapped inside a header element, exactly the way some visual page builders emit their markup, which historically defeated naive readers.</p>
+            <p class="framer-text">Because the prose lives several nested divs below a header tag, a reader that strips every header outright will delete the entire article. The correct behaviour is to keep header and footer elements that actually contain substantial non-link text, and only remove the ones that are genuine chrome.</p>
+            <p class="framer-text">This third paragraph adds enough additional body text that the densest-container heuristic and the soft-chrome rule both agree the surrounding header is content, not navigation, so the article survives cleaning and renders in the reader column.</p>
+            <p class="framer-text">A fourth and final paragraph ensures the cleaned length comfortably clears the minimum threshold, so extraction reports success rather than falling back to restyle mode on this Framer-style page.</p>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <!-- Real chrome footer: only links, little prose — should be stripped. -->
+  <footer class="framer-footer"><a href="/privacy">Privacy</a> <a href="/terms">Terms</a> <a href="/rss">RSS</a> <a href="/twitter">Twitter</a></footer>
+</body>
+</html>
